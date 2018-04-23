@@ -14,11 +14,11 @@ public class MoveToTarget : MonoBehaviour {
         navMeshAgent = GetComponent<NavMeshAgent>();
 	}
 	
-	// Update is called once per frame
 	void Update () {
+        navMeshAgent.destination = target.transform.position;
+    }
+    void RunAway() {
         Vector3 runAwayPosition = transform.position + (transform.position - target.transform.position).normalized;
-        //navMeshAgent.Move((transform.position - target.transform.position).normalized);
         navMeshAgent.destination = runAwayPosition;
-        //navMeshAgent.destination = (transform.position - target.transform.position).normalized;
     }
 }

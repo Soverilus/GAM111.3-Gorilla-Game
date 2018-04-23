@@ -5,6 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 
 public class PlayerMovement : MonoBehaviour {
+    bool canButtonJump;
+    bool canJump = false;
+    public float jumpForce = 0.001f;
+    Animator gorrilaAnim;
     CapsuleCollider myCapsuleCollider;
     bool isFalling = false;
     bool isJumping = false;
@@ -26,15 +30,23 @@ public class PlayerMovement : MonoBehaviour {
     Vector3 rawInput;
 
     void Start() {
+        gorrilaAnim = GetComponentInChildren<Animator>();
         myCapsuleCollider = GetComponent<CapsuleCollider>();
         playerRB = GetComponent<Rigidbody>();
     }
 
     void FixedUpdate() {
+        if (Input.GetAxisRaw("Jump") == 0) {
+            canButtonJump = true;
+        }
         RaycastHit hit;
-        if (Physics.SphereCast(transform.position, myCapsuleCollider.radius, Vector3.down, out hit, groundedDist))
+        if (Physics.SphereCast(transform.position, myCapsuleCollider.radius - 0.1f, Vector3.down, out hit, myCapsuleCollider.height*0.5f + groundedDist) && isJumping == false) {
             currentMoveState = MoveState.OnGround;
-        else if (isJumping) currentMoveState = MoveState.OnJump;
+            canJump = true;
+        }
+        else if (isJumping) {
+            currentMoveState = MoveState.OnJump;
+        }
         else currentMoveState = MoveState.InAir;
 
         input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -48,41 +60,58 @@ public class PlayerMovement : MonoBehaviour {
                 OnJumpMove();
                 break;
             case MoveState.InAir:
+                isFalling = true;
                 InAirMove();
                 break;
+        }
+        if (rawInput.magnitude != 0) {
+            Vector3 facingDir = input.normalized;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(facingDir, Vector3.up), Time.deltaTime * 50);
+            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
         }
     }
 
     void OnGroundMove() {
+        MoveGorilla();
+        if (rawInput.magnitude != 0) {
+            gorrilaAnim.SetBool("Running", true);
+        }
+        else if (rawInput.magnitude == 0) {
+            gorrilaAnim.SetBool("Running", false);
+        }
+        if (Input.GetAxis("Jump") > 0 && canButtonJump) {
+            canButtonJump = false;
+            isJumping = true;
+            gorrilaAnim.SetBool("Running", false);
+        }
+    }
+
+    void OnJumpMove() {
+        if (canJump) {
+            playerRB.AddForce(Vector3.up * playerRB.mass * jumpForce);
+            canJump = false;
+        }
+        Invoke("FallTimer", 0.1f);
+        if (isJumping == false) {
+            currentMoveState = MoveState.InAir;
+        }
+    }
+
+    void InAirMove() {
+        //Vector3 movementVector = Vector3.ClampMagnitude(new Vector3(input.x * airVel, 0, input.z * airVel), airVel);
+        // a way to only affect the x and z of .vel
+    }
+
+    void MoveGorilla() {
         if (playerRB.velocity.magnitude < maxVel) {
-            playerRB.AddForce((playerRB.mass + speed*2) * rawInput);
+            playerRB.AddForce((playerRB.mass + speed * 2) * rawInput);
         }
         else {
             Vector3.ClampMagnitude(playerRB.velocity, maxVel);
         }
-
-
         playerRB.velocity = Vector3.Lerp(playerRB.velocity, new Vector3(0, playerRB.velocity.y, 0), 0.075f);
-       // Vector3 normalizedVelocity = playerRB.velocity.normalized;
-
-        //  if (rawInput.x == 0) playerRB.AddForce(-normalizedVelocity.x * speed * Time.fixedDeltaTime, 0, 0);
-        // if (rawInput.z == 0) playerRB.AddForce(0, 0, -normalizedVelocity.z * speed * Time.fixedDeltaTime);
-
-        //playerRB.velocity = movementVector;
     }
-    void OnJumpMove() {
-        //Vector3 movementVector = Vector3.ClampMagnitude(new Vector3(input.x * jumpVel, 0, input.z * jumpVel), jumpVel);
-        // a way to only affect the x and z of .vel
-        if (input.x != 0 || input.z != 0) {
-            playerRB.AddForce(input);
-        }
-    }
-    void InAirMove() {
-        isFalling = true;
-        //Vector3 movementVector = Vector3.ClampMagnitude(new Vector3(input.x * airVel, 0, input.z * airVel), airVel);
-        // a way to only affect the x and z of .vel
-        if (input.x != 0 || input.z != 0) {
-            playerRB.AddForce(input);
-        }
+    void FallTimer() {
+        isJumping = false;
     }
 }

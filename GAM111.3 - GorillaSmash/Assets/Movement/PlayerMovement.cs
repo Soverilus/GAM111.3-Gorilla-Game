@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour {
     CapsuleCollider myCapsuleCollider;
     bool isFalling = false;
     bool isJumping = false;
-    public float groundedDist = 3.2f;
+    public float groundedDist = 0f;
     public float speed;
     public float maxVel;
     public float airVel;
@@ -36,11 +36,13 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void FixedUpdate() {
+        if (!canJump) gorrilaAnim.SetBool("Running", false);
         if (Input.GetAxisRaw("Jump") == 0) {
             canButtonJump = true;
         }
         RaycastHit hit;
         if (Physics.SphereCast(transform.position, myCapsuleCollider.radius - 0.1f, Vector3.down, out hit, myCapsuleCollider.height*0.5f + groundedDist) && isJumping == false) {
+            gorrilaAnim.SetBool("Jumped", false);
             currentMoveState = MoveState.OnGround;
             canJump = true;
         }
@@ -66,7 +68,7 @@ public class PlayerMovement : MonoBehaviour {
         }
         if (rawInput.magnitude != 0) {
             Vector3 facingDir = input.normalized;
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(facingDir, Vector3.up), Time.deltaTime * 50);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(facingDir, Vector3.up), Time.deltaTime * 5);
             transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
         }
     }
@@ -88,10 +90,11 @@ public class PlayerMovement : MonoBehaviour {
 
     void OnJumpMove() {
         if (canJump) {
+            gorrilaAnim.SetBool("Jumped", true);
             playerRB.AddForce(Vector3.up * playerRB.mass * jumpForce);
             canJump = false;
         }
-        Invoke("FallTimer", 0.1f);
+        Invoke("FallTimer", 0.25f);
         if (isJumping == false) {
             currentMoveState = MoveState.InAir;
         }

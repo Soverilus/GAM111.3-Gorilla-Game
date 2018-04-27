@@ -218,8 +218,8 @@ ModelImporter:
     - serializedVersion: 16
       name: gorillishArmature|gorillishJUMP
       takeName: gorillishArmature|gorillishJUMP
-      firstFrame: 0
-      lastFrame: 34
+      firstFrame: 3.9
+      lastFrame: 16.3
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

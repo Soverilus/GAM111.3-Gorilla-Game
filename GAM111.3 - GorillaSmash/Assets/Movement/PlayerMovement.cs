@@ -84,13 +84,13 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetAxis("Jump") > 0 && canButtonJump) {
             canButtonJump = false;
             isJumping = true;
-            gorrilaAnim.SetBool("Running", false);
         }
     }
 
     void OnJumpMove() {
         if (canJump) {
             gorrilaAnim.SetBool("Jumped", true);
+            gorrilaAnim.SetBool("Running", false);
             playerRB.AddForce(Vector3.up * playerRB.mass * jumpForce);
             canJump = false;
         }

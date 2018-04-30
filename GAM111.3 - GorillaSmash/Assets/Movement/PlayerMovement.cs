@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour {
             canButtonJump = true;
         }
         RaycastHit hit;
-        if (Physics.SphereCast(transform.position, myCapsuleCollider.radius - 0.1f, Vector3.down, out hit, myCapsuleCollider.height*0.5f + groundedDist) && isJumping == false) {
+        if (Physics.SphereCast(transform.position, myCapsuleCollider.radius - 1f, Vector3.down, out hit, myCapsuleCollider.height*0.5f + groundedDist) && isJumping == false) {
             gorrilaAnim.SetBool("Jumped", false);
             currentMoveState = MoveState.OnGround;
             canJump = true;
@@ -115,7 +115,8 @@ public class PlayerMovement : MonoBehaviour {
         else {
             Vector3.ClampMagnitude(playerRB.velocity, maxVel);
         }
-        //playerRB.velocity = Vector3.Lerp(playerRB.velocity, new Vector3(0, playerRB.velocity.y, 0), 0.075f);
+        if (canButtonJump)
+        playerRB.velocity = Vector3.Lerp(playerRB.velocity, new Vector3(0, playerRB.velocity.y, 0), 0.075f);
     }
     void FallTimer() {
         isJumping = false;

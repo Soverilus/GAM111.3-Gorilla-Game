@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour {
     public float groundedDist = 0f;
     public float speed;
     public float maxVel;
+    public float groundVel;
     public float airVel;
     public float jumpVel;
     Rigidbody playerRB;
@@ -74,20 +75,21 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void OnGroundMove() {
-        MoveGorilla();
+        MoveGorilla(groundVel);
         if (rawInput.magnitude != 0) {
             gorrilaAnim.SetBool("Running", true);
         }
         else if (rawInput.magnitude == 0) {
             gorrilaAnim.SetBool("Running", false);
         }
-        if (Input.GetAxis("Jump") > 0 && canButtonJump) {
+        if (Input.GetButton("Jump") && canButtonJump) {
             canButtonJump = false;
             isJumping = true;
         }
     }
 
     void OnJumpMove() {
+        MoveGorilla(jumpVel);
         if (canJump) {
             gorrilaAnim.SetBool("Jumped", true);
             gorrilaAnim.SetBool("Running", false);
@@ -101,18 +103,19 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void InAirMove() {
+        MoveGorilla(airVel);
         //Vector3 movementVector = Vector3.ClampMagnitude(new Vector3(input.x * airVel, 0, input.z * airVel), airVel);
         // a way to only affect the x and z of .vel
     }
 
-    void MoveGorilla() {
+    void MoveGorilla(float multVel) {
         if (playerRB.velocity.magnitude < maxVel) {
-            playerRB.AddForce((playerRB.mass + speed * 2) * rawInput);
+            playerRB.AddForce((playerRB.mass + speed * 2) * multVel * rawInput);
         }
         else {
             Vector3.ClampMagnitude(playerRB.velocity, maxVel);
         }
-        playerRB.velocity = Vector3.Lerp(playerRB.velocity, new Vector3(0, playerRB.velocity.y, 0), 0.075f);
+        //playerRB.velocity = Vector3.Lerp(playerRB.velocity, new Vector3(0, playerRB.velocity.y, 0), 0.075f);
     }
     void FallTimer() {
         isJumping = false;

@@ -106,10 +106,10 @@ MonoBehaviour:
     y: 30
     width: 2560
     height: 1307
-  m_MinSize: {x: 913, y: 442}
-  m_MaxSize: {x: 22008, y: 14021}
+  m_MinSize: {x: 917, y: 442}
+  m_MaxSize: {x: 22012, y: 14021}
   vertical: 0
-  controlID: 11
+  controlID: 166
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -130,10 +130,10 @@ MonoBehaviour:
     y: 0
     width: 2015
     height: 1307
-  m_MinSize: {x: 636, y: 442}
-  m_MaxSize: {x: 18006, y: 14021}
+  m_MinSize: {x: 640, y: 442}
+  m_MaxSize: {x: 18010, y: 14021}
   vertical: 1
-  controlID: 12
+  controlID: 109
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -155,10 +155,10 @@ MonoBehaviour:
     y: 0
     width: 2015
     height: 974
-  m_MinSize: {x: 636, y: 342}
-  m_MaxSize: {x: 18006, y: 10021}
+  m_MinSize: {x: 640, y: 342}
+  m_MaxSize: {x: 18010, y: 10021}
   vertical: 0
-  controlID: 13
+  controlID: 110
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -207,7 +207,7 @@ MonoBehaviour:
   m_MinSize: {x: 204, y: 342}
   m_MaxSize: {x: 4004, y: 8042}
   vertical: 1
-  controlID: 14
+  controlID: 88
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -278,8 +278,8 @@ MonoBehaviour:
     y: 0
     width: 278
     height: 974
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 204, y: 221}
+  m_MaxSize: {x: 4004, y: 4021}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -452,7 +452,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/low poly pack/land
+    - Assets/Camera
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders: []
@@ -464,7 +464,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 182b0000
     m_LastClickedID: 11032
-    m_ExpandedIDs: 00000000004a0000904a00008a4b0000904b0000ac4b0000cc4b0000ce4b0000004c0000044c00000c4c0000b44c0000b64c0000b84c0000ba4c0000
+    m_ExpandedIDs: 0000000030290000e0290000b22b00007c2f0000de310000d4350000d6350000d8350000da350000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -492,18 +492,18 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000004a0000264a0000904a0000904b0000064c0000b44c0000b64c0000b84c0000ba4c0000
+    m_ExpandedIDs: 0000000030290000e0290000b22b00007c2f0000dc310000de310000d4350000d6350000d8350000da350000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Eer2
-      m_OriginalName: Eer2
+      m_Name: PlayerToCam
+      m_OriginalName: PlayerToCam
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 18652
+      m_UserData: 1862
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -575,14 +575,14 @@ MonoBehaviour:
     height: 749
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
-  lastFramingTime: 11356.20162770133
+  lastFramingTime: 5268.8440805629825
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 19.241676, y: 20.2935, z: -44.703346}
+    m_Target: {x: 79.404335, y: 2.6233065, z: -7.9692936}
     speed: 2
-    m_Value: {x: 19.241676, y: 20.2935, z: -44.703346}
+    m_Value: {x: 79.404335, y: 2.6233065, z: -7.9692936}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -606,13 +606,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.23063669, y: 0.632313, z: -0.20525557, w: 0.710533}
+    m_Target: {x: -0.12868692, y: -0.6391717, z: 0.109644055, w: -0.75025165}
     speed: 2
-    m_Value: {x: 0.23063669, y: 0.632313, z: -0.20525557, w: 0.710533}
+    m_Value: {x: -0.12868692, y: -0.6391717, z: 0.109644055, w: -0.75025165}
   m_Size:
-    m_Target: 1.7633435
+    m_Target: 130.16571
     speed: 2
-    m_Value: 1.7633435
+    m_Value: 130.16571
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -742,18 +742,18 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: f29fe6ffce42eafff6dcfeff00000000
+    m_ExpandedIDs: 86faffff9efbffff0000000092330000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Wood
-      m_OriginalName: Wood
+      m_Name: Player
+      m_OriginalName: Player
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: -1289238
+      m_UserData: -1492
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0

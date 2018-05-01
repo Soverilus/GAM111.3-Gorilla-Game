@@ -21,7 +21,8 @@ GameObject:
   - component: {fileID: 4587637820541112}
   - component: {fileID: 33568657863684538}
   - component: {fileID: 23920439814379086}
-  m_Layer: 0
+  - component: {fileID: 64650730773352068}
+  m_Layer: 8
   m_Name: Mesh24
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +39,8 @@ GameObject:
   - component: {fileID: 4156729404637342}
   - component: {fileID: 33097409462688234}
   - component: {fileID: 23212327361160348}
-  m_Layer: 0
+  - component: {fileID: 64798550757791166}
+  m_Layer: 8
   m_Name: Mesh22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +55,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4982211420667352}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Component_17_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,7 +70,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4595787384014192}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,7 +87,8 @@ GameObject:
   - component: {fileID: 4664350799496168}
   - component: {fileID: 33568958087633454}
   - component: {fileID: 23132247541014346}
-  m_Layer: 0
+  - component: {fileID: 64144918216342664}
+  m_Layer: 8
   m_Name: Mesh23
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +103,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4703083061268614}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Component_17_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +118,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4508254565504272}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Component_16_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,16 +171,16 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1622960069724232}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.11315453, y: 0.16823247, z: 0.15343872, w: 0.9671352}
+  m_LocalPosition: {x: -117.17, y: -28.48, z: 23.29}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4508254565504272}
   - {fileID: 4982211420667352}
   - {fileID: 4703083061268614}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 9.628, y: 21.425001, z: 19.855001}
 --- !u!4 &4664350799496168
 Transform:
   m_ObjectHideFlags: 1
@@ -342,3 +345,45 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1706314356184376}
   m_Mesh: {fileID: 4300044, guid: b2c61055c4a01ad43b08434f8178e1c9, type: 3}
+--- !u!64 &64144918216342664
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1706314356184376}
+  m_Material: {fileID: 13400000, guid: 875401108614cb447bdbb1bbbe26361d, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300044, guid: b2c61055c4a01ad43b08434f8178e1c9, type: 3}
+--- !u!64 &64650730773352068
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1037366609486796}
+  m_Material: {fileID: 13400000, guid: 875401108614cb447bdbb1bbbe26361d, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300046, guid: b2c61055c4a01ad43b08434f8178e1c9, type: 3}
+--- !u!64 &64798550757791166
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1146793164422210}
+  m_Material: {fileID: 13400000, guid: 875401108614cb447bdbb1bbbe26361d, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300042, guid: b2c61055c4a01ad43b08434f8178e1c9, type: 3}

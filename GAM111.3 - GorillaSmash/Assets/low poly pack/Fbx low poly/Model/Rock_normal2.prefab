@@ -21,7 +21,8 @@ GameObject:
   - component: {fileID: 4574163363673790}
   - component: {fileID: 33587153314166596}
   - component: {fileID: 23821003665422238}
-  m_Layer: 0
+  - component: {fileID: 64371661324773240}
+  m_Layer: 8
   m_Name: Mesh83
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +37,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4084527928584542}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_normal2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,14 +50,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1580924806186536}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.16677354, y: 0.61619174, z: -0.40927735, w: -0.65190977}
+  m_LocalPosition: {x: 12.06, y: -3.3, z: 7.94}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 4574163363673790}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -196.675, y: -258.866, z: -129.502}
 --- !u!4 &4574163363673790
 Transform:
   m_ObjectHideFlags: 1
@@ -110,4 +111,18 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1371848690957050}
+  m_Mesh: {fileID: 4300164, guid: 62cb00c3de504054a9f5b49b90684964, type: 3}
+--- !u!64 &64371661324773240
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1371848690957050}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300164, guid: 62cb00c3de504054a9f5b49b90684964, type: 3}

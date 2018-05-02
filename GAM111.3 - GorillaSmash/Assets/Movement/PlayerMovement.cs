@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour {
     public float groundVel;
     public float airVel;
     public float jumpVel;
+    bool inWater;
+    float animSpeed;
     Vector3 inputActual;
     Vector3 rawInputActual;
     Vector3 previousFacing = Vector3.forward;
@@ -48,6 +50,7 @@ public class PlayerMovement : MonoBehaviour {
         gorrilaAnim = GetComponentInChildren<Animator>();
         myCapsuleCollider = GetComponent<CapsuleCollider>();
         playerRB = GetComponent<Rigidbody>();
+        animSpeed = gorrilaAnim.speed;
     }
 
     void InputCalculation(float inputY) {
@@ -57,6 +60,12 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void FixedUpdate() {
+        if (inWater) {
+            gorrilaAnim.speed = 0.5f * animSpeed;
+        }
+        else {
+            gorrilaAnim.speed = animSpeed;
+        }
         if (!canJump) gorrilaAnim.SetBool("Running", false);
         if (Input.GetAxisRaw("Jump") == 0) {
             canButtonJump = true;
@@ -81,12 +90,12 @@ public class PlayerMovement : MonoBehaviour {
             }
             else if (isJumping) {
                 currentMoveState = MoveState.OnJump;
-                InputCalculation(0f);    
+                InputCalculation(0f);
             }
             if (dotProd > -0.6f) {
                 canJump = false;
-                playerRB.AddForce(hit.normal.x * 3000, 250f, hit.normal.z * 3000);
-                
+                playerRB.AddForce(hit.normal.x * (speed * 1.5f), 250f, hit.normal.z * (speed * 1.5f));
+
             }
         }
         else if (isJumping) {
@@ -97,7 +106,7 @@ public class PlayerMovement : MonoBehaviour {
             currentMoveState = MoveState.InAir;
             InputCalculation(0f);
         }
-        
+
 
         switch (currentMoveState) {
             case MoveState.OnGround:
@@ -172,6 +181,11 @@ public class PlayerMovement : MonoBehaviour {
             SlowPlayer otherSlow;
             otherSlow = otherGO.GetComponent<SlowPlayer>();
             otherSlow.SlowDown(gameObject);
+            inWater = true;
+        }
+        if (otherGO.GetComponent<OffStage>() != null) {
+            OffStage otherOffStage;
+            otherOffStage = otherGO.GetComponent<OffStage>();
         }
     }
     private void OnTriggerExit(Collider other) {
@@ -180,6 +194,14 @@ public class PlayerMovement : MonoBehaviour {
             speed = originalSpeed;
             maxVel = originalMaxVel;
             jumpForce = originalJumpForce;
+            inWater = false;
+        }
+        if (otherGO.GetComponent<OffStage>() != null) {
+            OffStage otherOffStage;
+            otherOffStage = otherGO.GetComponent<OffStage>();
+            if (transform.position.y <= otherGO.transform.position.y) {
+                Destroy(gameObject);
+            }
         }
     }
 }

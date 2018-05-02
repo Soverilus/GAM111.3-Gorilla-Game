@@ -18,26 +18,33 @@ public class SmoothFollow : MonoBehaviour {
     }
 
     void Update() {
-        input = new Vector3(Input.GetAxis("CamHorizontal"), Input.GetAxis("CamVertical"), 0f);
-        rawInput = new Vector3(Input.GetAxisRaw("CamHorizontal"), Input.GetAxisRaw("CamVertical"), 0f);
-        crossProdInput = Vector3.Cross(player.transform.position, transform.position);
-        trueInput = new Vector3(0, crossProdInput.y + input.y, 0f).normalized;
-        if (transform.position.y <= player.transform.position.y + 10f) {
-            heightAbove = new Vector3(0f, 1f, 0f);
-        }
-        else {
-            heightAbove = Vector3.zero;
+        if (player != null) {
+            input = new Vector3(Input.GetAxis("CamHorizontal"), Input.GetAxis("CamVertical"), 0f);
+            rawInput = new Vector3(Input.GetAxisRaw("CamHorizontal"), Input.GetAxisRaw("CamVertical"), 0f);
+            crossProdInput = Vector3.Cross(player.transform.position, transform.position);
+            trueInput = new Vector3(0, crossProdInput.y + input.y, 0f).normalized;
+            if (transform.position.y <= player.transform.position.y + 15f) {
+                heightAbove = new Vector3(0f, 2f, 0f);
+            }
+            else if (transform.position.y >= player.transform.position.y + 20f) {
+                heightAbove = new Vector3(0f, -2f, 0f);
+            }
+            else {
+                heightAbove = Vector3.zero;
+            }
         }
     }
     public void SmoothCam(Vector3 camVect) {
-        Vector3 refRef = Vector3.zero;
-        //if (input.magnitude > 0) {
-        //positionHolder = (camVect - trueInput);
-        //}
-        //else {
-        positionHolder = camVect + heightAbove;
-        //}
-        transform.position = Vector3.SmoothDamp(transform.position, positionHolder, ref refRef, smoothTime);
-        //transform.position = positionHolder;
+        if (player != null) {
+            Vector3 refRef = Vector3.zero;
+            //if (input.magnitude > 0) {
+            //positionHolder = (camVect - trueInput);
+            //}
+            //else {
+            positionHolder = camVect + heightAbove;
+            //}
+            transform.position = Vector3.SmoothDamp(transform.position, positionHolder, ref refRef, smoothTime);
+            //transform.position = positionHolder;
+        }
     }
 }

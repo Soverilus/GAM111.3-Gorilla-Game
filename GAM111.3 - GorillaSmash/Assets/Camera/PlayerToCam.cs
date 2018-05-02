@@ -32,6 +32,6 @@ public class PlayerToCam : MonoBehaviour {
         //cameraObj.transform.position = transform.position + ((cameraObj.transform.position - transform.position).normalized * followMax);
 
         cameraObj.transform.LookAt(transform);
-        
+
     }
 }

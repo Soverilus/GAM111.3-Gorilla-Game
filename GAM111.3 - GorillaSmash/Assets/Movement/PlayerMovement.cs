@@ -8,12 +8,18 @@ public class PlayerMovement : MonoBehaviour {
     bool canButtonJump;
     bool canJump = false;
     public float jumpForce = 0.001f;
+    [HideInInspector]
+    public float originalJumpForce;
     Animator gorrilaAnim;
     CapsuleCollider myCapsuleCollider;
     bool isFalling = false;
     bool isJumping = false;
     public float groundedDist = 0f;
+    [HideInInspector]
+    public float originalSpeed;
     public float speed;
+    [HideInInspector]
+    public float originalMaxVel;
     public float maxVel;
     public float groundVel;
     public float airVel;
@@ -36,6 +42,9 @@ public class PlayerMovement : MonoBehaviour {
     Vector3 rawInput;
 
     void Start() {
+        originalMaxVel = maxVel;
+        originalSpeed = speed;
+        originalJumpForce = jumpForce;
         gorrilaAnim = GetComponentInChildren<Animator>();
         myCapsuleCollider = GetComponent<CapsuleCollider>();
         playerRB = GetComponent<Rigidbody>();
@@ -156,5 +165,21 @@ public class PlayerMovement : MonoBehaviour {
     }
     void FallTimer() {
         isJumping = false;
+    }
+    private void OnTriggerEnter(Collider other) {
+        GameObject otherGO = other.gameObject;
+        if (otherGO.GetComponent<SlowPlayer>() != null) {
+            SlowPlayer otherSlow;
+            otherSlow = otherGO.GetComponent<SlowPlayer>();
+            otherSlow.SlowDown(gameObject);
+        }
+    }
+    private void OnTriggerExit(Collider other) {
+        GameObject otherGO = other.gameObject;
+        if (otherGO.GetComponent<SlowPlayer>() != null) {
+            speed = originalSpeed;
+            maxVel = originalMaxVel;
+            jumpForce = originalJumpForce;
+        }
     }
 }

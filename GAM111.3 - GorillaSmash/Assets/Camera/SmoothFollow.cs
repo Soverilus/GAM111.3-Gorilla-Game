@@ -25,9 +25,9 @@ public class SmoothFollow : MonoBehaviour {
 			rawInput = new Vector3 (Input.GetAxisRaw ("CamHorizontal"), Input.GetAxisRaw ("CamVertical"), 0f);
 
 			if (rawInput.magnitude != 0f) {
-				if ((Vector3.Dot (Vector3.up, -transform.forward) >= 0.8f && rawInput.y >= 0) || 
-					(Vector3.Dot (Vector3.up, -transform.forward) <= -0.8f && rawInput.y <= 0)||
-					(Vector3.Dot (Vector3.up, -transform.forward) < 0.8f && Vector3.Dot (Vector3.up, -transform.forward) > -0.8f)) {
+				if ((Vector3.Dot (Vector3.up, -transform.forward) >= 0.9f && rawInput.y >= 0) || 
+					(Vector3.Dot (Vector3.up, -transform.forward) <= -0.9f && rawInput.y <= 0)||
+					(Vector3.Dot (Vector3.up, -transform.forward) < 0.9f && Vector3.Dot (Vector3.up, -transform.forward) > -0.9f)) {
 					movementVector = (transform.up * -input.y + transform.right * -input.x);
 				}
 			}

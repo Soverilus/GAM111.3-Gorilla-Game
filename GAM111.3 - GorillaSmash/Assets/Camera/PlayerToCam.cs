@@ -30,8 +30,11 @@ public class PlayerToCam : MonoBehaviour {
         }
 
         //cameraObj.transform.position = transform.position + ((cameraObj.transform.position - transform.position).normalized * followMax);
+        //Vector3 refRef = Vector3.zero;
+        Quaternion targetRotation = Quaternion.LookRotation(transform.position - cameraObj.transform.position);
 
-        cameraObj.transform.LookAt(transform);
+        cameraObj.transform.rotation = Quaternion.Slerp(cameraObj.transform.rotation, targetRotation, camFol.smoothTime*5f * Time.deltaTime);
+        //cameraObj.transform.LookAt(Vector3.SmoothDamp(cameraObj.transform.position, transform.position, ref refRef, camFol.smoothTime));
 
     }
 }

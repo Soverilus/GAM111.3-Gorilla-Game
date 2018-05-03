@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4709555070729686}
   - component: {fileID: 33152655839697934}
   - component: {fileID: 23017289211421086}
+  - component: {fileID: 64656394469506494}
   m_Layer: 0
   m_Name: Mesh150
   m_TagString: Untagged
@@ -68,6 +69,7 @@ GameObject:
   - component: {fileID: 4220127784804758}
   - component: {fileID: 33804274785936906}
   - component: {fileID: 23588460500017820}
+  - component: {fileID: 64280384471188452}
   m_Layer: 0
   m_Name: Mesh151
   m_TagString: Untagged
@@ -124,8 +126,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1516100184276718}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -42.9, y: 35.43, z: 55.37}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 4158664187908340}
   - {fileID: 4650273676104980}
@@ -241,3 +243,31 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1655120748813756}
   m_Mesh: {fileID: 4300300, guid: b2c61055c4a01ad43b08434f8178e1c9, type: 3}
+--- !u!64 &64280384471188452
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1655120748813756}
+  m_Material: {fileID: 13400000, guid: 875401108614cb447bdbb1bbbe26361d, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300300, guid: b2c61055c4a01ad43b08434f8178e1c9, type: 3}
+--- !u!64 &64656394469506494
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1136267280961608}
+  m_Material: {fileID: 13400000, guid: 875401108614cb447bdbb1bbbe26361d, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300298, guid: b2c61055c4a01ad43b08434f8178e1c9, type: 3}

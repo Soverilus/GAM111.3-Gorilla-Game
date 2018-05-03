@@ -10,7 +10,7 @@ public class SlowPlayer : MonoBehaviour {
             targetMovement = target.GetComponent<PlayerMovement>();
         }
         targetMovement.speed = 0.75f * targetMovement.originalSpeed;
-        targetMovement.maxVel = 0.5f * targetMovement.originalMaxVel;
-        targetMovement.jumpForce = 0.5f * targetMovement.originalJumpForce;
+        targetMovement.maxVel = 0.25f * targetMovement.originalMaxVel;
+        targetMovement.jumpForce = 0.25f * targetMovement.originalJumpForce;
     }
 }

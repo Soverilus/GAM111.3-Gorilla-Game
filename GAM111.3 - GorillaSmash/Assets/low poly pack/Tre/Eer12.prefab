@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4515507457547940}
   - component: {fileID: 33674642772783638}
   - component: {fileID: 23712986212633118}
+  - component: {fileID: 64509968689577514}
   m_Layer: 0
   m_Name: Mesh78
   m_TagString: Untagged
@@ -53,6 +54,7 @@ GameObject:
   - component: {fileID: 4919880805086740}
   - component: {fileID: 33494561732950794}
   - component: {fileID: 23464494784024358}
+  - component: {fileID: 64101879914286812}
   m_Layer: 0
   m_Name: Mesh80
   m_TagString: Untagged
@@ -201,9 +203,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1579897853072246}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.032138117, y: -0.0011111712, z: 0.034536347, w: 0.998886}
+  m_LocalPosition: {x: -90.69, y: 6.7, z: 33.75}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 4531155094552174}
   - {fileID: 4079555137700672}
@@ -211,7 +213,7 @@ Transform:
   - {fileID: 4047190907494714}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 3.686, y: 0, z: 3.9600003}
 --- !u!4 &4515507457547940
 Transform:
   m_ObjectHideFlags: 1
@@ -443,3 +445,31 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1811280319790374}
   m_Mesh: {fileID: 4300156, guid: b2c61055c4a01ad43b08434f8178e1c9, type: 3}
+--- !u!64 &64101879914286812
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1407456861839638}
+  m_Material: {fileID: 13400000, guid: 875401108614cb447bdbb1bbbe26361d, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300158, guid: b2c61055c4a01ad43b08434f8178e1c9, type: 3}
+--- !u!64 &64509968689577514
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1119701827316986}
+  m_Material: {fileID: 13400000, guid: 875401108614cb447bdbb1bbbe26361d, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300154, guid: b2c61055c4a01ad43b08434f8178e1c9, type: 3}

@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SmoothFollow : MonoBehaviour {
+    [SerializeField]
+    GameObject upCamObj;
+    [SerializeField]
+    GameObject leftCamObj;
     Vector3 positionHolder;
     GameObject player;
     Vector3 trueInput;
@@ -14,6 +18,7 @@ public class SmoothFollow : MonoBehaviour {
     Vector3 heightAbove;
 
     void Start() {
+        heightAbove = Vector3.zero;
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -21,16 +26,9 @@ public class SmoothFollow : MonoBehaviour {
         if (player != null) {
             input = new Vector3(Input.GetAxis("CamHorizontal"), Input.GetAxis("CamVertical"), 0f);
             rawInput = new Vector3(Input.GetAxisRaw("CamHorizontal"), Input.GetAxisRaw("CamVertical"), 0f);
-            crossProdInput = Vector3.Cross(player.transform.position, transform.position);
-            trueInput = new Vector3(0, crossProdInput.y + input.y, 0f).normalized;
-            if (transform.position.y <= player.transform.position.y + 15f) {
-                heightAbove = new Vector3(0f, 2f, 0f);
-            }
-            else if (transform.position.y >= player.transform.position.y + 20f) {
-                heightAbove = new Vector3(0f, -2f, 0f);
-            }
-            else {
-                heightAbove = Vector3.zero;
+
+            if (rawInput.magnitude != 0f) {
+
             }
         }
     }

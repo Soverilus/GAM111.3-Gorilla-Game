@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 
 public class PlayerMovement : MonoBehaviour {
+    Vector3 originalGravity = Physics.gravity;
     bool canButtonJump;
     bool canJump = false;
     public float jumpForce = 0.001f;
@@ -61,9 +62,11 @@ public class PlayerMovement : MonoBehaviour {
 
     void FixedUpdate() {
         if (inWater) {
-            gorrilaAnim.speed = 0.5f * animSpeed;
+            Physics.gravity = new Vector3(0, originalGravity.y * 0.25f, 0);
+            gorrilaAnim.speed = 0.25f * animSpeed;
         }
         else {
+            Physics.gravity = originalGravity;
             gorrilaAnim.speed = animSpeed;
         }
         if (!canJump) gorrilaAnim.SetBool("Running", false);
@@ -175,7 +178,7 @@ public class PlayerMovement : MonoBehaviour {
     void FallTimer() {
         isJumping = false;
     }
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerStay(Collider other) {
         GameObject otherGO = other.gameObject;
         if (otherGO.GetComponent<SlowPlayer>() != null) {
             SlowPlayer otherSlow;

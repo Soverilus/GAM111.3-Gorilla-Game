@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 
 public class PlayerMovement : MonoBehaviour {
+    public int bananasCollected;
+    public int superBananasCollected;
     Vector3 originalGravity = Physics.gravity;
     bool canButtonJump;
     bool canJump = false;
@@ -13,7 +15,6 @@ public class PlayerMovement : MonoBehaviour {
     public float originalJumpForce;
     Animator gorrilaAnim;
     CapsuleCollider myCapsuleCollider;
-    bool isFalling = false;
     bool isJumping = false;
     public float groundedDist = 0f;
     [HideInInspector]
@@ -27,9 +28,9 @@ public class PlayerMovement : MonoBehaviour {
     public float jumpVel;
     bool inWater;
     float animSpeed;
-    Vector3 inputActual;
+    //Vector3 inputActual;
     Vector3 rawInputActual;
-    Vector3 previousFacing = Vector3.forward;
+    //Vector3 previousFacing = Vector3.forward;
 
     Rigidbody playerRB;
     Quaternion angledOrientation = Quaternion.identity;
@@ -41,7 +42,7 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField]
     MoveState currentMoveState = MoveState.InAir;
 
-    Vector3 input;
+    //Vector3 input;
     Vector3 rawInput;
 
     void Start() {
@@ -55,7 +56,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void InputCalculation(float inputY) {
-        inputActual = new Vector3(Camera.main.transform.TransformDirection(input).x, inputY, Camera.main.transform.TransformDirection(input).z).normalized;
+        //inputActual = new Vector3(Camera.main.transform.TransformDirection(input).x, inputY, Camera.main.transform.TransformDirection(input).z).normalized;
         rawInputActual = new Vector3(Camera.main.transform.TransformDirection(rawInput).x, inputY, Camera.main.transform.TransformDirection(rawInput).z).normalized;
         //Debug.Log(rawInputActual);
     }
@@ -73,7 +74,7 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetAxisRaw("Jump") == 0) {
             canButtonJump = true;
         }
-        input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
+        //input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
         rawInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
 
         RaycastHit hit;
@@ -84,7 +85,6 @@ public class PlayerMovement : MonoBehaviour {
                 Quaternion oldRotation = transform.rotation;
                 transform.up = hit.normal;
                 angledOrientation = transform.rotation;
-                isFalling = true;
                 gorrilaAnim.SetBool("Jumped", false);
                 currentMoveState = MoveState.OnGround;
                 canJump = true;
@@ -119,7 +119,6 @@ public class PlayerMovement : MonoBehaviour {
                 OnJumpMove();
                 break;
             case MoveState.InAir:
-                isFalling = true;
                 InAirMove();
                 break;
         }
@@ -178,6 +177,15 @@ public class PlayerMovement : MonoBehaviour {
     void FallTimer() {
         isJumping = false;
     }
+
+    public void GetPoints(bool superBanana, int amount, GameObject banana) {
+        if (superBanana) {
+            superBananasCollected += 1;
+        }
+        bananasCollected += amount;
+        Destroy(banana);
+    }
+
     private void OnTriggerStay(Collider other) {
         GameObject otherGO = other.gameObject;
         if (otherGO.GetComponent<SlowPlayer>() != null) {
@@ -187,8 +195,8 @@ public class PlayerMovement : MonoBehaviour {
             inWater = true;
         }
         if (otherGO.GetComponent<OffStage>() != null) {
-            OffStage otherOffStage;
-            otherOffStage = otherGO.GetComponent<OffStage>();
+            /*OffStage otherOffStage;
+            otherOffStage = otherGO.GetComponent<OffStage>();*/
         }
     }
     private void OnTriggerExit(Collider other) {
@@ -200,11 +208,19 @@ public class PlayerMovement : MonoBehaviour {
             inWater = false;
         }
         if (otherGO.GetComponent<OffStage>() != null) {
-            OffStage otherOffStage;
-            otherOffStage = otherGO.GetComponent<OffStage>();
+            /*OffStage otherOffStage;
+            otherOffStage = otherGO.GetComponent<OffStage>();*/
             if (transform.position.y <= otherGO.transform.position.y) {
                 Destroy(gameObject);
             }
         }
+    }
+    
+    public void IDidntWantAnyBananasAnyways() {
+        //scenemanager.loseScreen.setenabled / Scenemanager.setscene losescreen
+    }
+
+    public void TheseAreMyBananasNow() {
+        //scenemanager.winScreen.setenabled / Scenemanager.setscene winscreen
     }
 }

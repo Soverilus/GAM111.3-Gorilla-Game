@@ -3,22 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent (typeof (NavMeshAgent))]
+[RequireComponent(typeof(NavMeshAgent))]
 public class MoveToTarget : MonoBehaviour {
-    [SerializeField]
-    GameObject target;
+    GameObject player;
 
     NavMeshAgent navMeshAgent;
 
-	void Start () {
+    void Start() {
         navMeshAgent = GetComponent<NavMeshAgent>();
-	}
-	
-	void Update () {
-        navMeshAgent.destination = target.transform.position;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
-    void RunAway() {
+
+    void Update() {
+        if (Vector3.Distance(transform.position, player.transform.position) <= 20f) {
+            navMeshAgent.destination = player.transform.position;
+        }
+        else {
+            navMeshAgent.destination = transform.position;
+        }
+    }
+    /*void RunAway() {
         Vector3 runAwayPosition = transform.position + (transform.position - target.transform.position).normalized;
         navMeshAgent.destination = runAwayPosition;
+    }*/
+    private void OnCollisionEnter(Collision collision) {
+        if (collision.collider.gameObject == player) {
+            player.GetComponent<PlayerMovement>().IDidntWantAnyBananasAnyways();
+        }
     }
 }

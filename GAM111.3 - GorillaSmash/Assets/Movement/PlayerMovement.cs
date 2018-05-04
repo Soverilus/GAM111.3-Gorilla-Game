@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody))]
 
 public class PlayerMovement : MonoBehaviour {
@@ -215,12 +216,24 @@ public class PlayerMovement : MonoBehaviour {
             }
         }
     }
-    
+    public SceneHolder sceneManager;
     public void IDidntWantAnyBananasAnyways() {
-        //scenemanager.loseScreen.setenabled / Scenemanager.setscene losescreen
+        Time.timeScale = 0f;
+        sceneManager.WinLose(false);
+        Debug.Log("You've Lost");
     }
 
     public void TheseAreMyBananasNow() {
-        //scenemanager.winScreen.setenabled / Scenemanager.setscene winscreen
+        Time.timeScale = 0f;
+        sceneManager.WinLose(true);
+        Debug.Log("you've won :D");
+    }
+
+    public Text banana;
+    public Text superBanana;
+
+    private void Update() {
+        banana.text = (bananasCollected.ToString() + " :");
+        superBanana.text = (superBananasCollected.ToString() + " :");
     }
 }

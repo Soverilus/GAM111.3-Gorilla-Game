@@ -15,7 +15,7 @@ public class MoveToTarget : MonoBehaviour {
     }
 
     void Update() {
-        if (Vector3.Distance(transform.position, player.transform.position) <= 20f) {
+        if (Vector3.Distance(transform.position, player.transform.position) <= 100f) {
             navMeshAgent.destination = player.transform.position;
         }
         else {

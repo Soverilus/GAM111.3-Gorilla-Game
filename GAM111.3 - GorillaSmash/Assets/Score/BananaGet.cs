@@ -8,7 +8,9 @@ public class BananaGet : MonoBehaviour {
     PlayerMovement playerScript;
 
     private void Start() {
-        playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        if (GameObject.FindGameObjectWithTag("Player") != null) {
+            playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        }
     }
 
     private void OnCollisionEnter(Collision collision) {

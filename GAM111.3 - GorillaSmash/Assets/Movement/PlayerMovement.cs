@@ -212,7 +212,7 @@ public class PlayerMovement : MonoBehaviour {
             /*OffStage otherOffStage;
             otherOffStage = otherGO.GetComponent<OffStage>();*/
             if (transform.position.y <= otherGO.transform.position.y) {
-                Destroy(gameObject);
+                IDidntWantAnyBananasAnyways();
             }
         }
     }

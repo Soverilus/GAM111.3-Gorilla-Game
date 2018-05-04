@@ -6,12 +6,13 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody))]
 
 public class PlayerMovement : MonoBehaviour {
+    Vector3 gravity;
     public AudioClip crunch;
     AudioClip myClip;
     AudioSource myAudio;
     public int bananasCollected;
     public int superBananasCollected;
-    Vector3 originalGravity = Physics.gravity;
+    Vector3 originalGravity;
     bool canButtonJump;
     bool canJump = false;
     public float jumpForce = 0.001f;
@@ -56,6 +57,8 @@ public class PlayerMovement : MonoBehaviour {
     Vector3 rawInput;
 
     void Start() {
+        Physics.gravity = new Vector3(0f, -39.24f, 0f);
+        originalGravity = Physics.gravity;
         myAudio = GetComponent<AudioSource>();
         myClip = myAudio.clip;
         originalMaxVel = maxVel;

@@ -6,6 +6,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody))]
 
 public class PlayerMovement : MonoBehaviour {
+    public AudioClip crunch;
+    AudioClip myClip;
+    AudioSource myAudio;
     public int bananasCollected;
     public int superBananasCollected;
     Vector3 originalGravity = Physics.gravity;
@@ -27,11 +30,17 @@ public class PlayerMovement : MonoBehaviour {
     public float groundVel;
     public float airVel;
     public float jumpVel;
+    bool won;
+    bool gameOver = false;
     bool inWater;
     float animSpeed;
+    bool switchedClips = false;
+    float originalVolume;
+    float timer;
+    public float timerMax;
     //Vector3 inputActual;
     Vector3 rawInputActual;
-    //Vector3 previousFacing = Vector3.forward;
+    //Vector3 previousFacing = Vector3.forward
 
     Rigidbody playerRB;
     Quaternion angledOrientation = Quaternion.identity;
@@ -47,6 +56,8 @@ public class PlayerMovement : MonoBehaviour {
     Vector3 rawInput;
 
     void Start() {
+        myAudio = GetComponent<AudioSource>();
+        myClip = myAudio.clip;
         originalMaxVel = maxVel;
         originalSpeed = speed;
         originalJumpForce = jumpForce;
@@ -54,6 +65,7 @@ public class PlayerMovement : MonoBehaviour {
         myCapsuleCollider = GetComponent<CapsuleCollider>();
         playerRB = GetComponent<Rigidbody>();
         animSpeed = gorrilaAnim.speed;
+        originalVolume = camAudio.volume;
     }
 
     void InputCalculation(float inputY) {
@@ -61,8 +73,27 @@ public class PlayerMovement : MonoBehaviour {
         rawInputActual = new Vector3(Camera.main.transform.TransformDirection(rawInput).x, inputY, Camera.main.transform.TransformDirection(rawInput).z).normalized;
         //Debug.Log(rawInputActual);
     }
+    private void OnCollisionEnter(Collision collision) {
+        if (collision.collider.gameObject.GetComponent<BananaGet>() != null) {
+            myAudio.clip = crunch;
+            myAudio.Play();
+            timer = 0f;
+        }
+    }
 
     void FixedUpdate() {
+        timer += Time.fixedDeltaTime;
+        if (playerRB.velocity.magnitude > 0.5f) {
+           // myAudio.clip = myClip;
+            //myAudio.Play();
+        }
+        else if (timer >= timerMax) {
+            myAudio.Stop();
+        }
+        //if (myAudio.clip.length <= timer) {
+            //myAudio.clip = myClip;
+            //myAudio.Play();
+        //}
         if (inWater) {
             Physics.gravity = new Vector3(0, originalGravity.y * 0.25f, 0);
             gorrilaAnim.speed = 0.25f * animSpeed;
@@ -218,13 +249,38 @@ public class PlayerMovement : MonoBehaviour {
     }
     public SceneHolder sceneManager;
     public void IDidntWantAnyBananasAnyways() {
-        Time.timeScale = 0f;
+        gameOver = true;
+        won = false;
+        maxVel = 0f;
+        speed = 0f;
+        jumpVel = 0f;
+        groundVel = 0f;
+        jumpForce = 0f;
+        originalJumpForce = 0f;
+        originalMaxVel = 0f;
+        originalSpeed = 0f;
+        playerRB.constraints = RigidbodyConstraints.FreezeAll;
+        playerRB.mass = Mathf.Infinity;
+        Physics.gravity = originalGravity;
         sceneManager.WinLose(false);
         Debug.Log("You've Lost");
     }
 
     public void TheseAreMyBananasNow() {
-        Time.timeScale = 0f;
+        gameOver = true;
+        won = true;
+        maxVel = 0f;
+        speed = 0f;
+        jumpVel = 0f;
+        groundVel = 0f;
+        jumpForce = 0f;
+        originalJumpForce = 0f;
+        originalMaxVel = 0f;
+        originalSpeed = 0f;
+        playerRB.constraints = RigidbodyConstraints.FreezeAll;
+        playerRB.mass = Mathf.Infinity;
+        GetComponent<CapsuleCollider>().enabled = false;
+        Physics.gravity = originalGravity;
         sceneManager.WinLose(true);
         Debug.Log("you've won :D");
     }
@@ -233,7 +289,35 @@ public class PlayerMovement : MonoBehaviour {
     public Text superBanana;
 
     private void Update() {
+        if (gameOver) {
+            setCamAudio(won);
+            if (switchedClips && camAudio.volume < originalVolume) {
+                camAudio.volume += 0.1f * Time.deltaTime;
+            }
+            else if (!switchedClips && camAudio.volume > 0.01f) {
+                camAudio.volume -= 0.1f * Time.deltaTime;
+            }
+        }
         banana.text = (bananasCollected.ToString() + " :");
         superBanana.text = (superBananasCollected.ToString() + " :");
+    }
+    public AudioSource camAudio;
+    public AudioClip[] loseWinAudio;
+
+    void setCamAudio(bool win) {
+        if (win) {
+            if (camAudio.volume <= 0.01f) {
+                camAudio.clip = loseWinAudio[0];
+                camAudio.Play();
+                switchedClips = true;
+            }
+        }
+        else {
+            if (camAudio.volume <= 0.01f) {
+                camAudio.clip = loseWinAudio[1];
+                camAudio.Play();
+                switchedClips = true;
+            }
+        }
     }
 }
